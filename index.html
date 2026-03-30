@@ -10,11 +10,11 @@
 *{box-sizing:border-box;margin:0;padding:0}
 :root{--cream:#f5f0e8;--dark:#1a1410;--red:#c0392b;--gold:#c9a84c;--border:#3a2e22}
 body{font-family:'DM Mono',monospace;background:#e8e0d0;color:var(--dark);min-height:100vh;padding:1.5rem 1rem 3rem}
-.app{max-width:900px;margin:0 auto}
+.app{max-width:960px;margin:0 auto}
 .header{text-align:center;margin-bottom:1.5rem;border-bottom:2px solid var(--border);padding-bottom:1rem}
 .header h1{font-family:'Special Elite',serif;font-size:2.4rem;letter-spacing:0.1em;color:var(--dark);font-weight:400}
 .header p{font-size:0.7rem;color:#7a6a56;letter-spacing:0.22em;text-transform:uppercase;margin-top:0.3rem}
-.main{display:grid;grid-template-columns:1fr 280px;gap:1.5rem;align-items:start}
+.main{display:grid;grid-template-columns:1fr 290px;gap:1.5rem;align-items:start}
 .viewfinder{position:relative;background:#0d0a07;border:3px solid var(--border);border-radius:4px;overflow:hidden;aspect-ratio:4/3;box-shadow:5px 5px 0 var(--border)}
 .viewfinder video{width:100%;height:100%;object-fit:cover;display:block;transform:scaleX(-1)}
 .corner{position:absolute;width:20px;height:20px;border-color:var(--gold);border-style:solid;opacity:0.75;z-index:2;pointer-events:none}
@@ -31,7 +31,7 @@ body{font-family:'DM Mono',monospace;background:#e8e0d0;color:var(--dark);min-he
 .cam-overlay{position:absolute;inset:0;background:rgba(13,10,7,0.92);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;z-index:30;text-align:center;padding:2rem}
 .cam-overlay h2{font-family:'Special Elite',serif;color:var(--cream);font-size:1.4rem;font-weight:400}
 .cam-overlay p{font-size:0.68rem;color:#9a8a76;letter-spacing:0.12em;text-transform:uppercase;line-height:1.9;max-width:240px}
-.cam-err{color:#e07060;font-size:0.68rem;letter-spacing:0.08em;max-width:240px;line-height:1.7}
+.cam-err{color:#e07060;font-size:0.68rem;letter-spacing:0.08em;max-width:240px;line-height:1.7;margin-top:0.5rem}
 .btn-cam-open{font-family:'DM Mono',monospace;font-size:0.8rem;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;border:2px solid var(--gold);border-radius:3px;padding:0.65rem 1.4rem;background:transparent;color:var(--gold);transition:all 0.15s}
 .btn-cam-open:hover{background:var(--gold);color:var(--dark)}
 .dots{display:flex;gap:6px;justify-content:center;padding:0.35rem 0}
@@ -66,23 +66,33 @@ body{font-family:'DM Mono',monospace;background:#e8e0d0;color:var(--dark);min-he
 .frow{display:flex;gap:2px}
 .fcell{background:var(--gold);border-radius:1px}
 .status-bar{font-size:0.62rem;color:#7a6a56;letter-spacing:0.1em;text-align:center;padding:0.28rem;border-top:1px solid #d4c9b0;margin-top:0.3rem}
+
+/* FRAME PICKER */
+.frame-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.5rem}
+.frame-btn{cursor:pointer;border:2px solid var(--border);border-radius:4px;padding:0.4rem;background:white;transition:all 0.15s;text-align:center;overflow:hidden}
+.frame-btn:hover{transform:translateY(-1px);box-shadow:2px 2px 0 var(--border)}
+.frame-btn.active{border-color:var(--gold);box-shadow:2px 2px 0 var(--gold)}
+.frame-preview{width:100%;height:40px;border-radius:2px;margin-bottom:4px;display:flex;align-items:center;justify-content:center;font-size:0.55rem;letter-spacing:0.05em;font-weight:500}
+.frame-name{font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--dark)}
+
+/* FILM STRIP */
 .film-strip{display:flex;flex-direction:column;gap:0.38rem}
-.film-thumb{position:relative;background:#0d0a07;border:1.5px solid var(--border);border-radius:2px;overflow:hidden;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center}
-.film-thumb img{max-width:100%;max-height:100%;width:auto;height:auto;display:block;object-fit:contain}
+.film-thumb{position:relative;border:1.5px solid var(--border);border-radius:2px;overflow:hidden;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;background:#0d0a07}
+.film-thumb img{width:100%;height:100%;object-fit:cover;display:block}
 .film-num{position:absolute;top:3px;left:5px;font-size:0.58rem;color:var(--gold);font-family:'Special Elite',serif;z-index:1}
 .film-del{position:absolute;top:3px;right:4px;background:rgba(192,57,43,0.88);color:white;border:none;border-radius:2px;font-size:0.58rem;cursor:pointer;padding:1px 5px;display:none;z-index:1}
 .film-thumb:hover .film-del{display:block}
 .empty-slot{background:#1a1410;display:flex;align-items:center;justify-content:center;aspect-ratio:4/3;border:1.5px dashed #3a2e22;border-radius:2px}
 .empty-slot span{font-size:0.6rem;color:#5a4a36;letter-spacing:0.1em}
 #export-canvas{display:none}
-@media(max-width:660px){.main{grid-template-columns:1fr}.header h1{font-size:1.6rem}}
+@media(max-width:680px){.main{grid-template-columns:1fr}.header h1{font-size:1.6rem}}
 </style>
 </head>
 <body>
 <div class="app">
   <div class="header">
     <h1>&#9726; PHOTOBOOTH &#9726;</h1>
-    <p>Fotoğraf çek &mdash; strip oluştur &mdash; export et</p>
+    <p>Fotograf cek &mdash; strip olustur &mdash; export et</p>
   </div>
   <div class="main">
     <div style="display:flex;flex-direction:column;gap:0.75rem">
@@ -111,6 +121,7 @@ body{font-family:'DM Mono',monospace;background:#e8e0d0;color:var(--dark);min-he
       </div>
       <canvas id="export-canvas"></canvas>
     </div>
+
     <div style="display:flex;flex-direction:column;gap:0.85rem">
       <div class="panel">
         <div class="panel-header">Ayarlar</div>
@@ -135,6 +146,7 @@ body{font-family:'DM Mono',monospace;background:#e8e0d0;color:var(--dark);min-he
           </div>
         </div>
       </div>
+
       <div class="panel">
         <div class="panel-header">Grid Formati</div>
         <div class="panel-body">
@@ -142,6 +154,14 @@ body{font-family:'DM Mono',monospace;background:#e8e0d0;color:var(--dark);min-he
           <div class="status-bar" id="fstat">2x2 secildi</div>
         </div>
       </div>
+
+      <div class="panel">
+        <div class="panel-header">Cerceve Stili</div>
+        <div class="panel-body">
+          <div class="frame-grid" id="frame-grid"></div>
+        </div>
+      </div>
+
       <div class="panel">
         <div class="panel-header">Film Seridi</div>
         <div class="panel-body">
@@ -153,43 +173,197 @@ body{font-family:'DM Mono',monospace;background:#e8e0d0;color:var(--dark);min-he
   </div>
 </div>
 <script>
-const S={stream:null,photos:[],maxPhotos:4,shooting:false,curFmt:'2x2',fmts:{'2x2':{cols:2,rows:2,label:'2x2',min:4,icon:[[1,1],[1,1]]},'1x4':{cols:1,rows:4,label:'1x4',min:4,icon:[[1],[1],[1],[1]]},'2x1':{cols:2,rows:1,label:'2x1',min:2,icon:[[1,1]]},'1x2':{cols:1,rows:2,label:'1x2',min:2,icon:[[1],[1]]},'1x3':{cols:1,rows:3,label:'1x3',min:3,icon:[[1],[1],[1]]},'3x1':{cols:3,rows:1,label:'3x1',min:3,icon:[[1,1,1]]}}};
+const S={
+  stream:null,photos:[],maxPhotos:4,shooting:false,curFmt:'2x2',curFrame:'classic',
+  videoW:1280,videoH:960,
+  fmts:{
+    '2x2':{cols:2,rows:2,label:'2x2',min:4,icon:[[1,1],[1,1]]},
+    '1x4':{cols:1,rows:4,label:'1x4',min:4,icon:[[1],[1],[1],[1]]},
+    '2x1':{cols:2,rows:1,label:'2x1',min:2,icon:[[1,1]]},
+    '1x2':{cols:1,rows:2,label:'1x2',min:2,icon:[[1],[1]]},
+    '1x3':{cols:1,rows:3,label:'1x3',min:3,icon:[[1],[1],[1]]},
+    '3x1':{cols:3,rows:1,label:'3x1',min:3,icon:[[1,1,1]]}
+  },
+  frames:{
+    classic:{
+      name:'Classic',
+      bg:'#f5f0e8',
+      outerBorder:'#1a1410',
+      innerBorder:'#f5f0e8',
+      cellBorder:'#3a2e22',
+      cellBorderW:2,
+      stamp:'#c9a84c',
+      pad:28,gap:12,bpad:22,
+      previewBg:'#f5f0e8',previewBorder:'#1a1410',previewText:'Classic'
+    },
+    vintage:{
+      name:'Vintage',
+      bg:'#2b1d0e',
+      outerBorder:'#8b6914',
+      innerBorder:'#2b1d0e',
+      cellBorder:'#c9a84c',
+      cellBorderW:2,
+      stamp:'#e8c97a',
+      pad:30,gap:14,bpad:24,
+      previewBg:'#2b1d0e',previewBorder:'#8b6914',previewText:'Vintage'
+    },
+    neon:{
+      name:'Neon',
+      bg:'#0a0a0f',
+      outerBorder:'#7b2ff7',
+      innerBorder:'#0a0a0f',
+      cellBorder:'#00f5d4',
+      cellBorderW:2,
+      stamp:'#f700ff',
+      pad:26,gap:10,bpad:20,
+      previewBg:'#0a0a0f',previewBorder:'#7b2ff7',previewText:'Neon'
+    },
+    minimal:{
+      name:'Minimal',
+      bg:'#ffffff',
+      outerBorder:'#e0e0e0',
+      innerBorder:'#ffffff',
+      cellBorder:'#cccccc',
+      cellBorderW:1,
+      stamp:'#aaaaaa',
+      pad:24,gap:8,bpad:18,
+      previewBg:'#ffffff',previewBorder:'#cccccc',previewText:'Minimal'
+    },
+    gold:{
+      name:'Gold',
+      bg:'#1a1205',
+      outerBorder:'#d4a017',
+      innerBorder:'#1a1205',
+      cellBorder:'#f0c040',
+      cellBorderW:3,
+      stamp:'#f0c040',
+      pad:32,gap:14,bpad:26,
+      previewBg:'#1a1205',previewBorder:'#d4a017',previewText:'Gold'
+    }
+  }
+};
+
 const $=id=>document.getElementById(id);
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+
+/* ── CAMERA ── */
 async function requestCamera(){
   $('cam-err').textContent='';
-  if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){$('cam-err').textContent='Bu tarayici kamera desteklemiyor.';return;}
+  if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){
+    $('cam-err').textContent='Bu tarayici kamera desteklemiyor.';return;
+  }
   try{
-    const stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'user',width:{ideal:1280},height:{ideal:960}},audio:false});
-    S.stream=stream;const v=$('video');v.srcObject=stream;try{await v.play();}catch(e){}
-    $('cam-overlay').style.display='none';$('btn-start').disabled=false;
+    const stream=await navigator.mediaDevices.getUserMedia({
+      video:{facingMode:'user',width:{ideal:1920},height:{ideal:1080}},
+      audio:false
+    });
+    S.stream=stream;
+    const track=stream.getVideoTracks()[0];
+    const settings=track.getSettings();
+    S.videoW=settings.width||1280;
+    S.videoH=settings.height||720;
+    const v=$('video');v.srcObject=stream;
+    try{await v.play();}catch(e){}
+    $('cam-overlay').style.display='none';
+    $('btn-start').disabled=false;
   }catch(e){
     let msg='Kamera acilamadi: '+e.name;
-    if(e.name==='NotAllowedError'||e.name==='PermissionDeniedError')msg='Izin reddedildi. Safari: Ayarlar > Gizlilik > Kamera > izin ver.';
-    else if(e.name==='NotFoundError')msg='Kamera bulunamadi.';
-    else if(e.name==='NotReadableError')msg='Kamera baska uygulama kullaniyor.';
-    else if(e.name==='OverconstrainedError'){try{const s2=await navigator.mediaDevices.getUserMedia({video:true,audio:false});S.stream=s2;$('video').srcObject=s2;try{await $('video').play();}catch(e2){}$('cam-overlay').style.display='none';$('btn-start').disabled=false;return;}catch(e2){msg='Hata: '+e2.message;}}
+    if(e.name==='NotAllowedError'||e.name==='PermissionDeniedError')
+      msg='Izin reddedildi. Safari: Ayarlar > Gizlilik > Kamera > Safari izin ver.';
+    else if(e.name==='NotFoundError') msg='Kamera bulunamadi.';
+    else if(e.name==='NotReadableError') msg='Kamera baska uygulama kullaniyor.';
+    else if(e.name==='OverconstrainedError'){
+      try{
+        const s2=await navigator.mediaDevices.getUserMedia({video:true,audio:false});
+        S.stream=s2;$('video').srcObject=s2;
+        try{await $('video').play();}catch(e2){}
+        $('cam-overlay').style.display='none';$('btn-start').disabled=false;return;
+      }catch(e2){msg='Hata: '+e2.message;}
+    }
     $('cam-err').textContent=msg;
   }
 }
+
+/* ── FORMATS ── */
 function buildFormats(){
   const g=$('fgrid');g.innerHTML='';
   Object.entries(S.fmts).forEach(([key,f])=>{
     if(f.min>S.maxPhotos)return;
-    const btn=document.createElement('button');btn.className='format-btn'+(key===S.curFmt?' active':'');btn.onclick=()=>selectFmt(key,btn);
-    const cw=f.cols===1?22:f.cols===2?10:7;const ch=f.rows===1?14:f.rows===2?7:5;
+    const btn=document.createElement('button');
+    btn.className='format-btn'+(key===S.curFmt?' active':'');
+    btn.onclick=()=>selectFmt(key,btn);
+    const cw=f.cols===1?22:f.cols===2?10:7;
+    const ch=f.rows===1?14:f.rows===2?7:5;
     const icon=document.createElement('div');icon.className='format-icon';
-    f.icon.forEach(row=>{const r=document.createElement('div');r.className='frow';row.forEach(()=>{const c=document.createElement('div');c.className='fcell';c.style.width=cw+'px';c.style.height=ch+'px';r.appendChild(c);});icon.appendChild(r);});
-    btn.appendChild(icon);btn.appendChild(document.createTextNode(f.label));g.appendChild(btn);
+    f.icon.forEach(row=>{
+      const r=document.createElement('div');r.className='frow';
+      row.forEach(()=>{
+        const c=document.createElement('div');c.className='fcell';
+        c.style.width=cw+'px';c.style.height=ch+'px';
+        r.appendChild(c);
+      });
+      icon.appendChild(r);
+    });
+    btn.appendChild(icon);btn.appendChild(document.createTextNode(f.label));
+    g.appendChild(btn);
   });
 }
-function selectFmt(key,btn){S.curFmt=key;document.querySelectorAll('.format-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');$('fstat').textContent=S.fmts[key].label+' secildi';}
+
+function selectFmt(key,btn){
+  S.curFmt=key;
+  document.querySelectorAll('.format-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  $('fstat').textContent=S.fmts[key].label+' secildi';
+}
+
 function onCountChange(){
   S.maxPhotos=parseInt($('nsel').value);S.photos=[];
-  if(S.fmts[S.curFmt].min>S.maxPhotos){const valid=Object.entries(S.fmts).find(([,f])=>f.min<=S.maxPhotos);if(valid)S.curFmt=valid[0];}
-  buildFormats();updateFilm();updateDots();$('export-row').style.display='none';$('btn-start').style.display='';$('btn-reset').style.display='none';
+  if(S.fmts[S.curFmt].min>S.maxPhotos){
+    const valid=Object.entries(S.fmts).find(([,f])=>f.min<=S.maxPhotos);
+    if(valid)S.curFmt=valid[0];
+  }
+  buildFormats();updateFilm();updateDots();
+  $('export-row').style.display='none';
+  $('btn-start').style.display='';$('btn-reset').style.display='none';
 }
-function updateDots(){const d=$('dots');d.innerHTML='';for(let i=0;i<S.maxPhotos;i++){const dot=document.createElement('div');dot.className='dot'+(i<S.photos.length?' filled':'');d.appendChild(dot);}}
+
+/* ── FRAMES ── */
+function buildFrames(){
+  const g=$('frame-grid');g.innerHTML='';
+  Object.entries(S.frames).forEach(([key,fr])=>{
+    const btn=document.createElement('button');
+    btn.className='frame-btn'+(key===S.curFrame?' active':'');
+    btn.onclick=()=>selectFrame(key,btn);
+    const prev=document.createElement('div');
+    prev.className='frame-preview';
+    prev.style.background=fr.previewBg;
+    prev.style.border='2px solid '+fr.previewBorder;
+    prev.style.color=fr.stamp;
+    prev.textContent=fr.previewText;
+    const name=document.createElement('div');
+    name.className='frame-name';name.textContent=fr.name;
+    btn.appendChild(prev);btn.appendChild(name);
+    g.appendChild(btn);
+  });
+}
+
+function selectFrame(key,btn){
+  S.curFrame=key;
+  document.querySelectorAll('.frame-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+/* ── DOTS ── */
+function updateDots(){
+  const d=$('dots');d.innerHTML='';
+  for(let i=0;i<S.maxPhotos;i++){
+    const dot=document.createElement('div');
+    dot.className='dot'+(i<S.photos.length?' filled':'');
+    d.appendChild(dot);
+  }
+}
+
+/* ── FILM STRIP ── */
 function updateFilm(){
   const fs=$('filmstrip');fs.innerHTML='';
   for(let i=0;i<S.maxPhotos;i++){
@@ -198,63 +372,172 @@ function updateFilm(){
       const img=document.createElement('img');img.src=S.photos[i];
       const num=document.createElement('div');num.className='film-num';num.textContent=(i+1)+'.';
       const del=document.createElement('button');del.className='film-del';del.textContent='x';
-      const idx=i;del.onclick=()=>{S.photos.splice(idx,1);updateFilm();updateDots();$('export-row').style.display='none';};
+      const idx=i;
+      del.onclick=()=>{S.photos.splice(idx,1);updateFilm();updateDots();$('export-row').style.display='none';};
       wrap.appendChild(img);wrap.appendChild(num);wrap.appendChild(del);fs.appendChild(wrap);
-    }else{const e=document.createElement('div');e.className='empty-slot';const s=document.createElement('span');s.textContent=(i+1)+'. KARE';e.appendChild(s);fs.appendChild(e);}
+    }else{
+      const e=document.createElement('div');e.className='empty-slot';
+      const s=document.createElement('span');s.textContent=(i+1)+'. KARE';
+      e.appendChild(s);fs.appendChild(e);
+    }
   }
   $('filmstat').textContent=S.photos.length+' / '+S.maxPhotos+' fotograf';
 }
+
+/* ── SESSION ── */
 async function startSession(){
   if(S.shooting||!S.stream)return;
-  S.shooting=true;S.photos=[];$('btn-start').style.display='none';$('btn-reset').style.display='';$('export-row').style.display='none';
+  S.shooting=true;S.photos=[];
+  $('btn-start').style.display='none';$('btn-reset').style.display='';
+  $('export-row').style.display='none';
   updateFilm();updateDots();
   for(let i=0;i<S.maxPhotos;i++){
     if(!S.shooting)break;
-    const dots=$('dots').querySelectorAll('.dot');if(dots[i])dots[i].classList.add('active');$('recbadge').style.display='block';
-    await countdown();if(!S.shooting)break;
-    snap();if(dots[i]){dots[i].classList.remove('active');dots[i].classList.add('filled');}
-    updateFilm();updateDots();if(i<S.maxPhotos-1)await sleep(900);
+    const dots=$('dots').querySelectorAll('.dot');
+    if(dots[i])dots[i].classList.add('active');
+    $('recbadge').style.display='block';
+    await countdown();
+    if(!S.shooting)break;
+    snap();
+    if(dots[i]){dots[i].classList.remove('active');dots[i].classList.add('filled');}
+    updateFilm();updateDots();
+    if(i<S.maxPhotos-1)await sleep(900);
   }
   S.shooting=false;$('recbadge').style.display='none';
   if(S.photos.length===S.maxPhotos)$('export-row').style.display='flex';
 }
-function resetSession(){S.shooting=false;S.photos=[];$('btn-start').style.display='';$('btn-reset').style.display='none';$('export-row').style.display='none';$('recbadge').style.display='none';$('cdn').classList.remove('show');updateFilm();updateDots();}
+
+function resetSession(){
+  S.shooting=false;S.photos=[];
+  $('btn-start').style.display='';$('btn-reset').style.display='none';
+  $('export-row').style.display='none';$('recbadge').style.display='none';
+  $('cdn').classList.remove('show');
+  updateFilm();updateDots();
+}
+
 async function countdown(){
   const secs=parseInt($('csel').value);const el=$('cdn');
   const showMs=secs<=2?450:750;const hideMs=secs<=2?100:200;
-  for(let s=secs;s>=1;s--){if(!S.shooting)return;el.textContent=s;el.classList.add('show');await sleep(showMs);el.classList.remove('show');await sleep(hideMs);}
-}
-function snap(){
-  const video=$('video');const canvas=document.createElement('canvas');const w=video.videoWidth||640;const h=video.videoHeight||480;
-  canvas.width=w;canvas.height=h;const ctx=canvas.getContext('2d');
-  ctx.save();ctx.scale(-1,1);ctx.drawImage(video,-w,0,w,h);ctx.restore();
-  S.photos.push(canvas.toDataURL('image/jpeg',0.93));
-  const fl=$('flash');fl.style.transition='none';fl.style.opacity='1';
-  requestAnimationFrame(()=>requestAnimationFrame(()=>{fl.style.transition='opacity 0.15s ease-out';fl.style.opacity='0';}));
-}
-async function doExport(mode){
-  const f=S.fmts[S.curFmt];const photos=S.photos.slice(0,f.cols*f.rows);
-  const CELL_W=320,CELL_H=240,PAD=24,GAP=12,BPAD=20;
-  const TW=f.cols*CELL_W+(f.cols-1)*GAP+PAD*2+BPAD*2;const TH=f.rows*CELL_H+(f.rows-1)*GAP+PAD*2+BPAD*2+42;
-  const canvas=$('export-canvas');canvas.width=TW;canvas.height=TH;const ctx=canvas.getContext('2d');
-  ctx.fillStyle='#f5f0e8';ctx.fillRect(0,0,TW,TH);
-  ctx.fillStyle='#1a1410';ctx.fillRect(BPAD,BPAD,TW-BPAD*2,TH-BPAD*2);
-  ctx.fillStyle='#f5f0e8';ctx.fillRect(BPAD+3,BPAD+3,TW-(BPAD+3)*2,TH-(BPAD+3)*2);
-  const IX=BPAD+PAD,IY=BPAD+PAD;
-  const loadImg=url=>new Promise((res,rej)=>{const img=new Image();img.onload=()=>res(img);img.onerror=rej;img.src=url;});
-  for(let i=0;i<photos.length;i++){
-    const col=i%f.cols,row=Math.floor(i/f.cols);const cx=IX+col*(CELL_W+GAP);const cy=IY+row*(CELL_H+GAP);
-    ctx.fillStyle='#0d0a07';ctx.fillRect(cx,cy,CELL_W,CELL_H);
-    try{const img=await loadImg(photos[i]);const scale=Math.min(CELL_W/img.naturalWidth,CELL_H/img.naturalHeight);const dw=img.naturalWidth*scale;const dh=img.naturalHeight*scale;const dx=cx+(CELL_W-dw)/2;const dy=cy+(CELL_H-dh)/2;ctx.drawImage(img,dx,dy,dw,dh);}catch(e){}
-    ctx.strokeStyle='#3a2e22';ctx.lineWidth=1.5;ctx.strokeRect(cx,cy,CELL_W,CELL_H);
+  for(let s=secs;s>=1;s--){
+    if(!S.shooting)return;
+    el.textContent=s;el.classList.add('show');
+    await sleep(showMs);el.classList.remove('show');await sleep(hideMs);
   }
-  ctx.fillStyle='#c9a84c';ctx.font='500 13px monospace';ctx.textAlign='center';
-  ctx.fillText('PHOTOBOOTH  -  '+new Date().toLocaleDateString('tr-TR'),TW/2,TH-BPAD-8);
-  const dataUrl=canvas.toDataURL('image/jpeg',0.95);
-  if(mode==='download'){const a=document.createElement('a');a.download='photobooth-'+Date.now()+'.jpg';a.href=dataUrl;a.click();}
-  else{const w=window.open('','_blank');if(w){w.document.write('<html><body style="margin:0;background:#1a1410;display:flex;align-items:center;justify-content:center;min-height:100vh"><img src="'+dataUrl+'" style="max-width:100%;max-height:100vh;display:block"></body></html>');w.document.close();}}
 }
-buildFormats();updateFilm();updateDots();
+
+/* ── SNAP — high quality, no black bars ── */
+function snap(){
+  const video=$('video');
+  // Use actual video dimensions for max quality
+  const vw=video.videoWidth||1280;
+  const vh=video.videoHeight||720;
+  S.videoW=vw;S.videoH=vh;
+  const canvas=document.createElement('canvas');
+  canvas.width=vw;canvas.height=vh;
+  const ctx=canvas.getContext('2d');
+  // Mirror horizontally so output looks natural
+  ctx.save();ctx.scale(-1,1);ctx.drawImage(video,-vw,0,vw,vh);ctx.restore();
+  // High quality JPEG
+  S.photos.push(canvas.toDataURL('image/jpeg',1.0));
+  // Flash
+  const fl=$('flash');
+  fl.style.transition='none';fl.style.opacity='1';
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    fl.style.transition='opacity 0.15s ease-out';fl.style.opacity='0';
+  }));
+}
+
+/* ── EXPORT ── */
+async function doExport(mode){
+  const f=S.fmts[S.curFmt];
+  const fr=S.frames[S.curFrame];
+  const photos=S.photos.slice(0,f.cols*f.rows);
+
+  // Determine cell size from actual photo ratio
+  const vw=S.videoW||1280;
+  const vh=S.videoH||720;
+  const ratio=vw/vh;
+
+  // Base cell height — scale up for quality
+  const BASE_H=480;
+  const CELL_H=BASE_H;
+  const CELL_W=Math.round(BASE_H*ratio);
+
+  const PAD=fr.pad,GAP=fr.gap,BPAD=fr.bpad;
+  const TW=f.cols*CELL_W+(f.cols-1)*GAP+PAD*2+BPAD*2;
+  const TH=f.rows*CELL_H+(f.rows-1)*GAP+PAD*2+BPAD*2+50;
+
+  const canvas=$('export-canvas');
+  canvas.width=TW;canvas.height=TH;
+  const ctx=canvas.getContext('2d');
+
+  // Background
+  ctx.fillStyle=fr.bg;ctx.fillRect(0,0,TW,TH);
+  // Outer border line
+  ctx.strokeStyle=fr.outerBorder;ctx.lineWidth=3;
+  ctx.strokeRect(BPAD,BPAD,TW-BPAD*2,TH-BPAD*2);
+  // Inner fill
+  ctx.fillStyle=fr.innerBorder;
+  ctx.fillRect(BPAD+4,BPAD+4,TW-(BPAD+4)*2,TH-(BPAD+4)*2);
+
+  const IX=BPAD+PAD,IY=BPAD+PAD;
+
+  const loadImg=url=>new Promise((res,rej)=>{
+    const img=new Image();img.onload=()=>res(img);img.onerror=rej;img.src=url;
+  });
+
+  for(let i=0;i<photos.length;i++){
+    const col=i%f.cols,row=Math.floor(i/f.cols);
+    const cx=IX+col*(CELL_W+GAP);
+    const cy=IY+row*(CELL_H+GAP);
+
+    try{
+      const img=await loadImg(photos[i]);
+      // Cover: fill entire cell, center crop — no black bars
+      const imgRatio=img.naturalWidth/img.naturalHeight;
+      const cellRatio=CELL_W/CELL_H;
+      let sx=0,sy=0,sw=img.naturalWidth,sh=img.naturalHeight;
+      if(imgRatio>cellRatio){
+        // image wider than cell: crop sides
+        sw=Math.round(img.naturalHeight*cellRatio);
+        sx=Math.round((img.naturalWidth-sw)/2);
+      }else{
+        // image taller than cell: crop top/bottom
+        sh=Math.round(img.naturalWidth/cellRatio);
+        sy=Math.round((img.naturalHeight-sh)/2);
+      }
+      ctx.save();
+      ctx.beginPath();ctx.rect(cx,cy,CELL_W,CELL_H);ctx.clip();
+      ctx.drawImage(img,sx,sy,sw,sh,cx,cy,CELL_W,CELL_H);
+      ctx.restore();
+    }catch(e){}
+
+    // Cell border
+    ctx.strokeStyle=fr.cellBorder;ctx.lineWidth=fr.cellBorderW;
+    ctx.strokeRect(cx,cy,CELL_W,CELL_H);
+  }
+
+  // Date stamp
+  ctx.fillStyle=fr.stamp;
+  ctx.font='bold 18px monospace';ctx.textAlign='center';
+  ctx.fillText('PHOTOBOOTH  -  '+new Date().toLocaleDateString('tr-TR'),TW/2,TH-BPAD-10);
+
+  const dataUrl=canvas.toDataURL('image/jpeg',0.97);
+
+  if(mode==='download'){
+    const a=document.createElement('a');
+    a.download='photobooth-'+Date.now()+'.jpg';
+    a.href=dataUrl;a.click();
+  }else{
+    const w=window.open('','_blank');
+    if(w){
+      w.document.write('<html><body style="margin:0;background:#111;display:flex;align-items:center;justify-content:center;min-height:100vh"><img src="'+dataUrl+'" style="max-width:100%;max-height:100vh;display:block"></body></html>');
+      w.document.close();
+    }
+  }
+}
+
+buildFormats();buildFrames();updateFilm();updateDots();
 </script>
 </body>
 </html>
