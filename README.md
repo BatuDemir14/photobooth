@@ -1,86 +1,122 @@
-# 📷 Photobooth
+# Photobooth
 
-Tarayıcı tabanlı retro photobooth uygulaması. Fotoğraf çek, çerçeve seç, grid oluştur, paylaş.
+Tarayici tabanli, mobil oncelikli retro photobooth uygulamasi. Fotograf cek, filtre uygula, cerceve sec, grid olustur, paylas.
 
-🌐 **Canlı site:** https://batudemir14.github.io/photobooth/
+**Canli site:** https://batudemir14.github.io/photobooth/
 
 ---
 
-## Özellikler
+## Ozellikler
 
-### Fotoğraf Çekme
-- Tarayıcıdan kamera erişimi (Safari ve Chrome destekli)
-- Geri sayım: 1, 2, 3, 5, 10 saniye
-- Otomatik oturum — seçilen sayıda fotoğrafı arka arkaya çeker
-- Flaş efekti her çekimde
-- Film şeridinde anlık önizleme
-- Tek tek fotoğraf silebilme
+### Fotograf Cekme
+- Tarayicidan kamera erisimi (Safari ve Chrome destekli)
+- On/arka kamera degistirme (coklu kamerali cihazlarda)
+- Geri sayim: 1, 2, 3, 5, 10 saniye
+- Gorsel countdown progress bar
+- Countdown beep sesi (Web Audio API)
+- Otomatik oturum — secilen sayida fotografi arka arkaya ceker
+- Flas efekti + deklansor sesi her cekimde
+- Film seridinde anlik onizleme
+- Tek tek fotograf silebilme
+- Surukleme ile fotograf siralama
 
-### Grid Formatları
-| Format | Açıklama |
+### Filtreler (Canli Onizleme)
+| Filtre | Aciklama |
 |--------|----------|
-| 2×2 | 4 fotoğraf, kare düzen |
-| 1×4 | 4 fotoğraf, dikey şerit |
-| 2×1 | 2 fotoğraf, yatay |
-| 1×2 | 2 fotoğraf, dikey |
-| 1×3 | 3 fotoğraf, dikey şerit |
-| 3×1 | 3 fotoğraf, yatay şerit |
+| Normal | Filtre yok |
+| Siyah-Beyaz | Grayscale |
+| Sepya | Sicak vintage ton |
+| Soluk | Dusuk kontrast, pastel |
+| Canli | Yuksek doygunluk |
 
-### Çerçeve Stilleri
-| Çerçeve | Açıklama |
+### Grid Formatlari
+| Format | Aciklama |
+|--------|----------|
+| 1x1 | Tek fotograf, kare (Instagram) |
+| 2x1 | 2 fotograf, yatay |
+| 1x2 | 2 fotograf, dikey |
+| 2x2 | 4 fotograf, kare duzen |
+| 2x2 Kare | 4 fotograf, kare export |
+| 1x3 | 3 fotograf, dikey serit |
+| 3x1 | 3 fotograf, yatay serit |
+| 1x4 | 4 fotograf, dikey serit |
+
+### Cerceve Stilleri
+| Cerceve | Aciklama |
 |---------|----------|
-| 🎞 Klasik | Krem/kahve, vintage film estetiği, gold kenarlıklar |
-| ⬜ Minimal | Beyaz, sade ve temiz |
-| 🎂 Doğum Günü | Mor gradient, konfeti, 🎉🎈🎊 emojiler |
-| ❤️ Aşk | Kırmızı gradient, 🌹💋💕 emojiler, çift çerçeve |
-| 🌸 Bahar | Koyu yeşil, 🌺🌷🦋 çiçek emojiler |
-| 🌌 Galaksi | Uzay gradient, yıldızlar, neon mor glow efekti |
+| Klasik | Krem/kahve, vintage film estetigi, gold kenarliklar |
+| Minimal | Beyaz, sade ve temiz |
+| Dogum Gunu | Mor gradient, konfeti, emoji dekorasyonlar |
+| Ask | Kirmizi gradient, kalp ve gul emojiler, cift cerceve |
+| Bahar | Koyu yesil, cicek emojiler |
+| Galaksi | Uzay gradient, yildizlar, neon mor glow efekti |
 
-### Export & Paylaşım
-- Yüksek kalite JPG (hücre başına 600×450 px, fotoğraf 1200×900 px)
-- Siyah kenar yok — cover-crop ile tam doluyor
-- Tarih damgası her çerçevede
-- **İndir** — direkt JPG olarak kaydet
-- **Paylaş** — sistem paylaşım menüsü (AirDrop, Mail vb.)
-- **Galeriye Kaydet** — iOS'ta fotoğraf galerisine kaydet
-- Önizleme penceresi
+### Ek Ozellikler
+- **Ayna modu** — acma/kapama butonu
+- **Tam ekran modu** — viewfinder'i fullscreen yapma
+- **Poz onerileri** — Komik, Romantik, Klasik kategorilerde rastgele pozlar
+- **Metin yerlestirme** — Isim ve tarih overlay'i export uzerinde
+- **Konfeti animasyonu** — cekim tamamlaninca kutlama efekti
+- **Toast bildirimleri** — sik bildirim sistemi (alert yok)
+- **Fotograf lightbox** — thumbnail'a tikla, buyuk onizle, oklarla gezin
+- **Klavye kisayollari** — Space (baslat), R (sifirla), M (ayna), F (tam ekran)
+
+### Export & Paylasim
+- Yuksek kalite JPG (hucre basina 600x450 px, fotograf 1200x900 px)
+- Cover-crop ile tam doluyor
+- Tarih damgasi her cercevede
+- **Indir** — direkt JPG olarak kaydet
+- **GIF Olustur** — fotograflari animasyonlu GIF olarak indir
+- **Paylas** — sistem paylasim menusu (AirDrop, Mail vb.)
+- **Galeriye Kaydet** — iOS'ta fotograf galerisine kaydet
+- Onizleme penceresi
 
 ---
 
-## Kullanım
+## Kullanim
 
-1. **Kamerayı Aç** → tarayıcı izin ister, izin ver
-2. Geri sayım ve fotoğraf sayısını seç
-3. **Oturumu Başlat** → poz ver, geri sayım başlar
-4. Çekim bittikten sonra grid formatı ve çerçeve seç
-5. **İndir / Paylaş / Galeriye Kaydet**
+1. **Kamerayi Ac** — tarayici izin ister, izin ver
+2. Geri sayim ve fotograf sayisini sec
+3. Istersen filtre, cerceve ve grid formatini ayarla
+4. **Oturumu Baslat** — poz ver, geri sayim baslar
+5. Cekim bittikten sonra ayarlari degistir veya direkt indir
+6. **Indir / GIF Olustur / Paylas / Galeriye Kaydet**
+
+---
+
+## Mobil Deneyim
+
+Uygulama mobil oncelikli tasarlandi:
+- Dikey 3:4 viewfinder (selfie dostu)
+- Yatay kaydirmali film seridi
+- Buyuk dokunma alanlari (min 44px)
+- Safe area destegi (centikli telefonlar)
+- On/arka kamera gecisi
+- Tam ekran modu
+- Reduce motion medya sorgusu destegi
 
 ---
 
 ## Teknik Detaylar
 
-Saf HTML / CSS / JavaScript — kütüphane yok, framework yok, tek dosya.
+Saf HTML / CSS / JavaScript — kutuphane yok, framework yok, tek dosya.
 
-- `getUserMedia` API ile yüksek çözünürlüklü kamera erişimi
-- `Canvas` API ile fotoğraf çekme, cover-crop ve export
-- `Web Share API` ile paylaşım ve galeriye kaydetme
-- Her çerçeve stili canvas'ta ayrı render fonksiyonu ile çiziliyor
-- GitHub Pages üzerinde barındırılıyor, HTTPS otomatik
-
----
-
-## Güncelleme
-```bash
-cat > ~/photobooth/index.html
-# kodu yapıştır → Enter → Ctrl+D
-
-cd ~/photobooth && git add index.html && git commit -m "guncelleme" && git push
-```
+- `getUserMedia` API ile yuksek cozunurluklu kamera erisimi
+- `Canvas` API ile fotograf cekme, cover-crop ve export
+- `Web Audio API` ile deklansor sesi ve countdown beep
+- `Web Share API` ile paylasim ve galeriye kaydetme
+- `Fullscreen API` ile tam ekran modu
+- Inline LZW encoder ile GIF olusturma
+- CSS filtreleri ile canli video onizleme
+- Her cerceve stili canvas'ta ayri render fonksiyonu ile ciziliyor
+- GitHub Pages uzerinde barindiriliyor, HTTPS otomatik
 
 ---
 
-## Sürüm Geçmişi
+## Surum Gecmisi
 
-- **v3** — 6 tematik çerçeve (Doğum Günü, Aşk, Bahar, Galaksi), koyu tema, profesyonel tasarım, paylaş & galeriye kaydet
-- **v2** — Yüksek kalite çekim (1200×900), cover-crop, 1-2 sn geri sayım eklendi
-- **v1** — İlk sürüm: kamera, grid formatları, JPG export
+- **v5** — Mobil oncelikli responsive tasarim, toast bildirimleri, konfeti, countdown progress bar & beep, tam ekran, kamera degistirme, lightbox, klavye kisayollari
+- **v4** — Filtreler, deklansor sesi, ayna modu, surukle-siralama, metin yerlestirme, Instagram formati, GIF export, poz onerileri, Turkce duzeltmeleri, UI iyilestirmeleri
+- **v3** — 6 tematik cerceve, koyu tema, profesyonel tasarim, paylas & galeriye kaydet
+- **v2** — Yuksek kalite cekim (1200x900), cover-crop, 1-2 sn geri sayim eklendi
+- **v1** — Ilk surum: kamera, grid formatlari, JPG export
