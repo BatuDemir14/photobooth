@@ -52,10 +52,10 @@ Tarayici tabanli, mobil oncelikli retro photobooth uygulamasi. Fotograf cek, fil
 | Galaksi | Uzay gradient, nebula renk izleri, cok katmanli yildiz alani, difraksiyon efektleri |
 
 ### Ek Ozellikler
-- **Duzenle modu** — tam ekran overlay'da cerceve degistirme, fotograf sirasini degistirme (tap-to-swap), canli onizleme
+- **Duzenle modu** — fotografa tikla veya Duzenle butonuna bas, tam ekran overlay'da cerceve degistir, fotograf sirasini degistir (tap-to-swap), canli onizleme
 - **Ayna modu** — acma/kapama butonu
 - **Tam ekran modu** — viewfinder'i fullscreen yapma
-- **Poz onerileri** — Komik, Romantik, Klasik kategorilerde rastgele pozlar
+- **Poz onerileri** — Her fotograf oncesi ekranda gosteriliyor, Komik/Romantik/Klasik kategoriler
 - **Metin yerlestirme** — Isim ve tarih overlay'i export uzerinde
 - **Konfeti animasyonu** — cekim tamamlaninca kutlama efekti
 - **Toast bildirimleri** — sik bildirim sistemi (alert yok)
@@ -89,7 +89,8 @@ Tarayici tabanli, mobil oncelikli retro photobooth uygulamasi. Fotograf cek, fil
 Uygulama mobil oncelikli tasarlandi:
 - Dikey 3:4 viewfinder (selfie dostu)
 - Yatay kaydirmali film seridi
-- Touch destekli fotograf surukle-siralama
+- Fotograf siralama ok butonlari (mobilde kolay kullanim)
+- Fotografa tiklayinca duzenle modu aciliyor
 - Buyuk dokunma alanlari (min 44px)
 - Safe area destegi (centikli telefonlar)
 - On/arka kamera gecisi
@@ -116,7 +117,8 @@ Saf HTML / CSS / JavaScript — kutuphane yok, framework yok, tek dosya.
 
 ## Surum Gecmisi
 
-- **v6** — Bug fixler (mobil baslik hizalama, filtre export Safari uyumu, metin overlay cakismasi, mobil touch siralama), duzenle modu, cerceve render iyilestirmeleri (doku, golge, dekorasyon), UI polish (header shimmer, panel glow, kayit border efekti)
+- **v6.1** — Her fotograf oncesi poz onerisi, checkbox tik stili, mobil ok butonlariyla siralama, fotografa tikla duzenle, layout yeniden duzenleme
+- **v6** — Bug fixler (mobil baslik hizalama, filtre export Safari uyumu, metin overlay cakismasi), duzenle modu, cerceve render iyilestirmeleri (doku, golge, dekorasyon), UI polish (header shimmer, panel glow, kayit border efekti)
 - **v5** — Mobil oncelikli responsive tasarim, toast bildirimleri, konfeti, countdown progress bar & beep, tam ekran, kamera degistirme, lightbox, klavye kisayollari
 - **v4** — Filtreler, deklansor sesi, ayna modu, surukle-siralama, metin yerlestirme, Instagram formati, GIF export, poz onerileri, Turkce duzeltmeleri, UI iyilestirmeleri
 - **v3** — 6 tematik cerceve, koyu tema, profesyonel tasarim, paylas & galeriye kaydet
