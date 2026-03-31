@@ -192,6 +192,10 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .film-del{position:absolute;top:4px;right:4px;background:rgba(255,59,48,0.85);color:white;border:none;border-radius:2px;font-size:0.55rem;cursor:pointer;padding:2px 5px;display:none;z-index:1;transition:background var(--transition-fast)}
 .film-del:hover{background:rgba(255,59,48,1)}
 .film-thumb:hover .film-del{display:block}
+.film-arrows{position:absolute;bottom:3px;left:0;right:0;display:flex;justify-content:center;gap:4px;z-index:2}
+.film-arrow{background:rgba(0,0,0,0.7);color:var(--gold);border:none;border-radius:3px;font-size:0.5rem;padding:2px 6px;cursor:pointer;transition:background var(--transition-fast);line-height:1}
+.film-arrow:hover{background:rgba(0,0,0,0.9)}
+@media(min-width:681px){.film-arrows{display:none}}
 .empty-slot{background:var(--bg);display:flex;align-items:center;justify-content:center;aspect-ratio:4/3;border:1px dashed var(--border);border-radius:4px;transition:border-color var(--transition-fast)}
 .empty-slot:hover{border-color:rgba(255,255,255,0.15)}
 .empty-slot span{font-size:0.55rem;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase}
@@ -211,14 +215,12 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .text-overlay-inputs input{font-family:'DM Mono',monospace;font-size:0.65rem;border:1px solid var(--border);border-radius:3px;padding:0.3rem 0.5rem;background:var(--bg);color:var(--text);outline:none;width:100%;transition:border-color var(--transition-fast)}
 .text-overlay-inputs input:focus{border-color:var(--gold)}
 .text-overlay-inputs input::placeholder{color:var(--muted)}
-.toggle-row{display:flex;align-items:center;gap:0.5rem;margin-top:0.35rem}
-.toggle-row label{font-size:0.6rem;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;flex:1}
-.toggle-switch{position:relative;width:32px;height:18px;cursor:pointer;flex-shrink:0}
-.toggle-switch input{opacity:0;width:0;height:0;position:absolute}
-.toggle-track{position:absolute;inset:0;background:var(--surface2);border:1px solid var(--border);border-radius:9px;transition:all var(--transition-fast)}
-.toggle-switch input:checked ~ .toggle-track{background:rgba(201,168,76,0.3);border-color:var(--gold)}
-.toggle-knob{position:absolute;top:2px;left:2px;width:12px;height:12px;background:var(--muted);border-radius:50%;transition:all var(--transition-fast)}
-.toggle-switch input:checked ~ .toggle-knob{left:16px;background:var(--gold)}
+.check-row{display:flex;align-items:center;gap:0.5rem;margin-top:0.35rem;cursor:pointer;user-select:none}
+.check-row input{position:absolute;opacity:0;width:0;height:0}
+.checkmark{width:20px;height:20px;border:1.5px solid var(--border);border-radius:4px;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:0.7rem;color:transparent;transition:all var(--transition-fast);flex-shrink:0}
+.check-row input:checked ~ .checkmark{border-color:var(--gold);background:rgba(201,168,76,0.15);color:var(--gold)}
+.check-row:hover .checkmark{border-color:rgba(255,255,255,0.25)}
+.check-label{font-size:0.62rem;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase}
 
 /* POSE PANEL */
 .pose-categories{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.3rem;margin-bottom:0.5rem}
@@ -342,9 +344,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
   .setting-row label{font-size:0.65rem}
 
   /* Toggle bigger */
-  .toggle-switch{width:40px;height:22px}
-  .toggle-knob{width:16px;height:16px;top:2px;left:2px}
-  .toggle-switch input:checked ~ .toggle-knob{left:20px}
+  .checkmark{width:24px;height:24px;font-size:0.8rem}
 
   /* Mirror & fullscreen buttons bigger */
   .mirror-toggle,.camswitch-btn,.fullscreen-btn{padding:6px 10px;font-size:0.6rem;min-height:34px;min-width:34px}
@@ -435,9 +435,9 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .edit-controls{
   flex-shrink:0;
   background:var(--surface);border-top:1px solid var(--border);
-  padding:0.75rem 1rem max(env(safe-area-inset-bottom,0px),0.75rem);
-  display:flex;flex-direction:column;gap:0.75rem;
-  overflow-y:auto;max-height:48vh;
+  padding:0.6rem 1rem max(env(safe-area-inset-bottom,0px),0.6rem);
+  display:flex;flex-direction:column;gap:0.5rem;
+  overflow-y:auto;max-height:35vh;
 }
 
 .edit-section-label{
@@ -503,9 +503,14 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 }
 
 @media(max-width:680px){
-  .edit-controls{max-height:52vh;padding:0.65rem 0.85rem max(env(safe-area-inset-bottom,0px),0.65rem)}
-  .edit-frame-btn{min-width:64px}
-  .edit-photo-thumb{width:64px;height:48px}
+  .edit-controls{max-height:32vh;padding:0.5rem 0.75rem max(env(safe-area-inset-bottom,0px),0.5rem);gap:0.4rem}
+  .edit-section-label{font-size:0.5rem;margin-bottom:0.25rem}
+  .edit-frame-btn{min-width:60px}
+  .edit-frame-btn .frame-preview{height:36px}
+  .edit-frame-btn .frame-label{font-size:0.48rem;padding:0.2rem}
+  .edit-photo-thumb{width:56px;height:42px}
+  .edit-swap-hint{font-size:0.5rem}
+  .edit-preview-wrap{padding:0.5rem}
 }
 </style>
 </head>
@@ -622,37 +627,13 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
               <option value="4" selected>4 fotoğraf</option>
             </select>
           </div>
+          <label class="check-row" style="margin-top:0.5rem">
+            <input type="checkbox" id="overlay-toggle" checked>
+            <span class="checkmark">✓</span>
+            <span class="check-label">Metni göster</span>
+          </label>
         </div>
       </div>
-
-      <div class="panel" style="animation-delay:0.1s">
-        <div class="panel-header">&#9632; &nbsp;Grid Formatı</div>
-        <div class="panel-body">
-          <div class="format-grid" id="fgrid"></div>
-          <div class="status-bar" id="fstat">2x2 seçildi</div>
-        </div>
-      </div>
-
-      <div class="panel" style="animation-delay:0.15s">
-        <div class="panel-header">&#9632; &nbsp;Çerçeve Stili</div>
-        <div class="panel-body" style="padding:0.6rem">
-          <div class="frame-grid" id="frame-grid"></div>
-          <div class="status-bar" id="frmstat" style="margin-top:0.4rem">Klasik seçildi</div>
-        </div>
-      </div>
-
-      <div class="panel" style="animation-delay:0.2s">
-        <div class="panel-header">&#9632; &nbsp;Film Şeridi</div>
-        <div class="panel-body">
-          <div class="film-strip" id="filmstrip"></div>
-          <div class="status-bar" id="filmstat">0 / 4 fotoğraf</div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- RIGHT SIDEBAR -->
-    <div class="right-sidebar" style="display:flex;flex-direction:column;gap:0.75rem">
 
       <div class="panel" style="animation-delay:0.08s">
         <div class="panel-header">&#9632; &nbsp;Filtreler</div>
@@ -662,20 +643,42 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
         </div>
       </div>
 
+      <div class="panel" style="animation-delay:0.1s">
+        <div class="panel-header">&#9632; &nbsp;Çerçeve Stili</div>
+        <div class="panel-body" style="padding:0.6rem">
+          <div class="frame-grid" id="frame-grid"></div>
+          <div class="status-bar" id="frmstat" style="margin-top:0.4rem">Klasik seçildi</div>
+        </div>
+      </div>
+
+      <div class="panel" style="animation-delay:0.15s">
+        <div class="panel-header">&#9632; &nbsp;Film Şeridi</div>
+        <div class="panel-body">
+          <div class="film-strip" id="filmstrip"></div>
+          <div class="status-bar" id="filmstat">0 / 4 fotoğraf</div>
+          <div class="status-bar" id="film-edit-hint" style="display:none;color:var(--gold);font-size:0.52rem">Fotoğrafa tıkla → düzenle</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT SIDEBAR -->
+    <div class="right-sidebar" style="display:flex;flex-direction:column;gap:0.75rem">
+
+      <div class="panel" style="animation-delay:0.1s">
+        <div class="panel-header">&#9632; &nbsp;Grid Formatı</div>
+        <div class="panel-body">
+          <div class="format-grid" id="fgrid"></div>
+          <div class="status-bar" id="fstat">2x2 seçildi</div>
+        </div>
+      </div>
+
       <div class="panel" style="animation-delay:0.13s">
         <div class="panel-header">&#9632; &nbsp;Metin Yerleşimi</div>
         <div class="panel-body">
           <div class="text-overlay-inputs">
             <input type="text" id="overlay-name" placeholder="İsim (ör: Ayşe & Berk)" maxlength="40">
             <input type="text" id="overlay-date" placeholder="Tarih (ör: 31.03.2026)" maxlength="20">
-          </div>
-          <div class="toggle-row">
-            <label>Metni göster</label>
-            <label class="toggle-switch">
-              <input type="checkbox" id="overlay-toggle" checked>
-              <div class="toggle-track"></div>
-              <div class="toggle-knob"></div>
-            </label>
           </div>
         </div>
       </div>
@@ -1207,11 +1210,10 @@ function updateFilm(){
       wrap.draggable=true;
       wrap.dataset.idx=i;
 
+      // Desktop drag support
       wrap.addEventListener('dragstart',e=>{
-        dragSrcIdx=i;
-        wrap.classList.add('dragging');
-        e.dataTransfer.effectAllowed='move';
-        e.dataTransfer.setData('text/plain',String(i));
+        dragSrcIdx=i;wrap.classList.add('dragging');
+        e.dataTransfer.effectAllowed='move';e.dataTransfer.setData('text/plain',String(i));
       });
       wrap.addEventListener('dragend',()=>{
         wrap.classList.remove('dragging');
@@ -1233,51 +1235,32 @@ function updateFilm(){
         dragSrcIdx=null;
       });
 
-      // Touch support for mobile reorder
-      let touchStartY=0,touchStartX=0;
-      wrap.addEventListener('touchstart',e=>{
-        dragSrcIdx=i;
-        wrap.classList.add('dragging');
-        touchStartX=e.touches[0].clientX;
-        touchStartY=e.touches[0].clientY;
-      },{passive:true});
-      wrap.addEventListener('touchmove',e=>{
-        e.preventDefault();
-        const touch=e.touches[0];
-        const el=document.elementFromPoint(touch.clientX,touch.clientY);
-        document.querySelectorAll('.film-thumb').forEach(t=>t.classList.remove('drag-over'));
-        if(el){
-          const thumb=el.closest('.film-thumb');
-          if(thumb)thumb.classList.add('drag-over');
-        }
-      },{passive:false});
-      wrap.addEventListener('touchend',e=>{
-        wrap.classList.remove('dragging');
-        const touch=e.changedTouches[0];
-        const el=document.elementFromPoint(touch.clientX,touch.clientY);
-        document.querySelectorAll('.film-thumb').forEach(t=>t.classList.remove('drag-over'));
-        if(el){
-          const thumb=el.closest('.film-thumb');
-          if(thumb){
-            const targetIdx=parseInt(thumb.dataset.idx);
-            if(dragSrcIdx!==null&&dragSrcIdx!==targetIdx){
-              const moved=S.photos.splice(dragSrcIdx,1)[0];
-              S.photos.splice(targetIdx,0,moved);
-              updateFilm();updateDots();
-            }
-          }
-        }
-        dragSrcIdx=null;
-      });
-
       const img=document.createElement('img');img.src=S.photos[i];
-      img.addEventListener('click',()=>openLightbox(i));
-      img.style.cursor='zoom-in';img.style.pointerEvents='auto';
+      // Click opens edit overlay if photos are complete, otherwise lightbox
+      img.addEventListener('click',()=>{
+        if(S.photos.length===S.maxPhotos&&typeof openEditOverlay==='function')openEditOverlay();
+        else openLightbox(i);
+      });
+      img.style.cursor='pointer';img.style.pointerEvents='auto';
       const num=document.createElement('div');num.className='film-num';num.textContent=(i+1);
       const del=document.createElement('button');del.className='film-del';del.textContent='x';
       const idx=i;
-      del.onclick=()=>{S.photos.splice(idx,1);updateFilm();updateDots();$('export-row').style.display='none';};
-      wrap.appendChild(img);wrap.appendChild(num);wrap.appendChild(del);
+      del.onclick=e=>{e.stopPropagation();S.photos.splice(idx,1);updateFilm();updateDots();$('export-row').style.display='none';};
+
+      // Swap arrows for mobile
+      const arrows=document.createElement('div');arrows.className='film-arrows';
+      if(i>0){
+        const left=document.createElement('button');left.className='film-arrow';left.textContent='◀';
+        left.onclick=e=>{e.stopPropagation();const t=S.photos[i];S.photos[i]=S.photos[i-1];S.photos[i-1]=t;updateFilm();updateDots();};
+        arrows.appendChild(left);
+      }
+      if(i<S.photos.length-1){
+        const right=document.createElement('button');right.className='film-arrow';right.textContent='▶';
+        right.onclick=e=>{e.stopPropagation();const t=S.photos[i];S.photos[i]=S.photos[i+1];S.photos[i+1]=t;updateFilm();updateDots();};
+        arrows.appendChild(right);
+      }
+
+      wrap.appendChild(img);wrap.appendChild(num);wrap.appendChild(del);wrap.appendChild(arrows);
       fs.appendChild(wrap);
     }else{
       const e=document.createElement('div');e.className='empty-slot';
@@ -1320,14 +1303,16 @@ async function startSession(){
   $('export-spinner').style.display='none';
   updateFilm();updateDots();
 
-  // Show a pose suggestion before starting
-  const list=S.poses[S.poseCat];
-  const poseTxt=list[Math.floor(Math.random()*list.length)];
-  showPoseOverlay(poseTxt);
-  await sleep(1800);
-
   for(let i=0;i<S.maxPhotos;i++){
     if(!S.shooting)break;
+
+    // Show a pose suggestion before each photo
+    const list=S.poses[S.poseCat];
+    const poseTxt=list[Math.floor(Math.random()*list.length)];
+    showPoseOverlay(poseTxt);
+    await sleep(1800);
+    if(!S.shooting)break;
+
     const dots=$('dots').querySelectorAll('.dot');
     if(dots[i])dots[i].classList.add('active');
     $('recbadge').style.display='block';
@@ -1340,6 +1325,7 @@ async function startSession(){
   S.shooting=false;$('recbadge').style.display='none';
   if(S.photos.length===S.maxPhotos){
     $('export-row').style.display='flex';
+    $('film-edit-hint').style.display='';
     if(navigator.share){$('btn-share').style.display='';$('btn-save').style.display='';}
     fireConfetti();
     toast('Tüm fotoğraflar çekildi! Dışa aktarabilirsiniz.','success');
@@ -1348,7 +1334,7 @@ async function startSession(){
 function resetSession(){
   S.shooting=false;S.photos=[];
   $('btn-start').style.display='';$('btn-reset').style.display='none';
-  $('export-row').style.display='none';$('recbadge').style.display='none';
+  $('export-row').style.display='none';$('recbadge').style.display='none';$('film-edit-hint').style.display='none';
   $('export-spinner').style.display='none';
   $('cdn').classList.remove('show');
   updateFilm();updateDots();
