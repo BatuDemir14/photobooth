@@ -44,14 +44,15 @@ Tarayici tabanli, mobil oncelikli retro photobooth uygulamasi. Fotograf cek, fil
 ### Cerceve Stilleri
 | Cerceve | Aciklama |
 |---------|----------|
-| Klasik | Krem/kahve, vintage film estetigi, gold kenarliklar |
-| Minimal | Beyaz, sade ve temiz |
-| Dogum Gunu | Mor gradient, konfeti, emoji dekorasyonlar |
-| Ask | Kirmizi gradient, kalp ve gul emojiler, cift cerceve |
-| Bahar | Koyu yesil, cicek emojiler |
-| Galaksi | Uzay gradient, yildizlar, neon mor glow efekti |
+| Klasik | Krem kagit dokusu, altin kose susleri, vintage estetik |
+| Minimal | Beyaz mat, golge efektli hucre kenarliklari, modern tipografi |
+| Dogum Gunu | Mor gradient, renkli konfeti sekilleri (daire, serit, ucgen, yildiz), isiltili dekor |
+| Ask | Kirmizi gradient, bezier kalp desenleri, vignette efekti |
+| Bahar | Yesil gradient, yaprak/botanik dekorasyonlar, isik lekeleri |
+| Galaksi | Uzay gradient, nebula renk izleri, cok katmanli yildiz alani, difraksiyon efektleri |
 
 ### Ek Ozellikler
+- **Duzenle modu** — tam ekran overlay'da cerceve degistirme, fotograf sirasini degistirme (tap-to-swap), canli onizleme
 - **Ayna modu** — acma/kapama butonu
 - **Tam ekran modu** — viewfinder'i fullscreen yapma
 - **Poz onerileri** — Komik, Romantik, Klasik kategorilerde rastgele pozlar
@@ -69,7 +70,6 @@ Tarayici tabanli, mobil oncelikli retro photobooth uygulamasi. Fotograf cek, fil
 - **GIF Olustur** — fotograflari animasyonlu GIF olarak indir
 - **Paylas** — sistem paylasim menusu (AirDrop, Mail vb.)
 - **Galeriye Kaydet** — iOS'ta fotograf galerisine kaydet
-- Onizleme penceresi
 
 ---
 
@@ -79,7 +79,7 @@ Tarayici tabanli, mobil oncelikli retro photobooth uygulamasi. Fotograf cek, fil
 2. Geri sayim ve fotograf sayisini sec
 3. Istersen filtre, cerceve ve grid formatini ayarla
 4. **Oturumu Baslat** — poz ver, geri sayim baslar
-5. Cekim bittikten sonra ayarlari degistir veya direkt indir
+5. Cekim bittikten sonra **Duzenle** ile cerceve/siralama degistir veya direkt indir
 6. **Indir / GIF Olustur / Paylas / Galeriye Kaydet**
 
 ---
@@ -89,6 +89,7 @@ Tarayici tabanli, mobil oncelikli retro photobooth uygulamasi. Fotograf cek, fil
 Uygulama mobil oncelikli tasarlandi:
 - Dikey 3:4 viewfinder (selfie dostu)
 - Yatay kaydirmali film seridi
+- Touch destekli fotograf surukle-siralama
 - Buyuk dokunma alanlari (min 44px)
 - Safe area destegi (centikli telefonlar)
 - On/arka kamera gecisi
@@ -107,7 +108,7 @@ Saf HTML / CSS / JavaScript — kutuphane yok, framework yok, tek dosya.
 - `Web Share API` ile paylasim ve galeriye kaydetme
 - `Fullscreen API` ile tam ekran modu
 - Inline LZW encoder ile GIF olusturma
-- CSS filtreleri ile canli video onizleme
+- Pixel bazli manuel filtre uygulama (Safari/iOS uyumlu, ctx.filter bagimli degil)
 - Her cerceve stili canvas'ta ayri render fonksiyonu ile ciziliyor
 - GitHub Pages uzerinde barindiriliyor, HTTPS otomatik
 
@@ -115,6 +116,7 @@ Saf HTML / CSS / JavaScript — kutuphane yok, framework yok, tek dosya.
 
 ## Surum Gecmisi
 
+- **v6** — Bug fixler (mobil baslik hizalama, filtre export Safari uyumu, metin overlay cakismasi, mobil touch siralama), duzenle modu, cerceve render iyilestirmeleri (doku, golge, dekorasyon), UI polish (header shimmer, panel glow, kayit border efekti)
 - **v5** — Mobil oncelikli responsive tasarim, toast bildirimleri, konfeti, countdown progress bar & beep, tam ekran, kamera degistirme, lightbox, klavye kisayollari
 - **v4** — Filtreler, deklansor sesi, ayna modu, surukle-siralama, metin yerlestirme, Instagram formati, GIF export, poz onerileri, Turkce duzeltmeleri, UI iyilestirmeleri
 - **v3** — 6 tematik cerceve, koyu tema, profesyonel tasarim, paylas & galeriye kaydet
