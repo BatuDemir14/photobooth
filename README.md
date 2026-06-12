@@ -28,6 +28,10 @@ Tarayici tabanli, mobil oncelikli retro photobooth uygulamasi. Fotograf cek, fil
 | Sepya | Sicak vintage ton |
 | Soluk | Dusuk kontrast, pastel |
 | Canli | Yuksek doygunluk |
+| Gun Batimi | Altin saat sicakligi, kirmizi tonlar yukari |
+| Buz | Soguk mavi tonlar, hafif kontrast |
+| Noir | Yuksek kontrast siyah-beyaz, sinematik |
+| Film | Retro film: desature + grain + sicak tint |
 
 ### Grid Formatlari
 | Format | Aciklama |
@@ -52,22 +56,30 @@ Tarayici tabanli, mobil oncelikli retro photobooth uygulamasi. Fotograf cek, fil
 | Galaksi | Uzay gradient, nebula renk izleri, cok katmanli yildiz alani, difraksiyon efektleri |
 
 ### Ek Ozellikler
+- **Tek kare yeniden cekim** — film seridinde herhangi bir karenin uzerindeki ↻ butonuyla sadece o kareyi tekrar cek
+- **Ekran flasi** — karanlik ortamda cekim aninda ekran beyaza donerek yuzu aydinlatir (on kamera flasi)
+- **Izgara kilavuzu** — kural-ucte-bir cizgileriyle kadraj yardimi (viewfinder butonu veya G tusu)
+- **Ses ac/kapa** — beep ve deklansor seslerini kapatma secenegi
+- **Titresim (haptic)** — geri sayim ve cekim aninda telefonda titresim geri bildirimi
+- **Wake Lock** — cekim sirasinda ekranin kararmasi engellenir
+- **Ayar hatirlama** — geri sayim, filtre, cerceve, format ve isim localStorage'da saklanir
 - **Duzenle modu** — fotografa tikla veya Duzenle butonuna bas, tam ekran overlay'da cerceve degistir, fotograf sirasini degistir (tap-to-swap), canli onizleme
 - **Ayna modu** — acma/kapama butonu
 - **Tam ekran modu** — viewfinder'i fullscreen yapma
 - **Poz onerileri** — Her fotograf oncesi ekranda gosteriliyor, Komik/Romantik/Klasik kategoriler
 - **Metin yerlestirme** — Isim ve tarih overlay'i export uzerinde
 - **Konfeti animasyonu** — cekim tamamlaninca kutlama efekti
-- **Toast bildirimleri** — sik bildirim sistemi (alert yok)
+- **Toast bildirimleri** — sik bildirim sistemi (alert yok), ekran okuyucu uyumlu (aria-live)
 - **Fotograf lightbox** — thumbnail'a tikla, buyuk onizle, oklarla gezin
-- **Klavye kisayollari** — Space (baslat), R (sifirla), M (ayna), F (tam ekran)
+- **Klavye kisayollari** — Space (baslat), R (sifirla), M (ayna), G (izgara), F (tam ekran)
+- **PWA** — ana ekrana eklenebilir, uygulama gibi acilir (manifest + tema rengi)
 
 ### Export & Paylasim
 - Yuksek kalite JPG (hucre basina 600x450 px, fotograf 1200x900 px)
 - Cover-crop ile tam doluyor
 - Tarih damgasi her cercevede
 - **Indir** — direkt JPG olarak kaydet
-- **GIF Olustur** — fotograflari animasyonlu GIF olarak indir
+- **GIF Boomerang** — ileri-geri oynayan animasyonlu GIF; Bayer dithering ile yumusak renk gecisleri; mobilde dogrudan paylasim menusune dusur
 - **Paylas** — sistem paylasim menusu (AirDrop, Mail vb.)
 - **Galeriye Kaydet** — iOS'ta fotograf galerisine kaydet
 
@@ -117,6 +129,7 @@ Saf HTML / CSS / JavaScript — kutuphane yok, framework yok, tek dosya.
 
 ## Surum Gecmisi
 
+- **v7.0** — Tek kare yeniden cekim, ekran flasi, izgara kilavuzu, ses ac/kapa, GIF Boomerang + Bayer dithering + GIF paylasimi, 4 yeni filtre (Gun Batimi, Buz, Noir, Film), Wake Lock, haptic geri bildirim, ayar hatirlama (localStorage), PWA destegi (manifest, tema rengi, favicon), SVG ikonlar, focus-visible erisilebilirlik, mobil yatay tasma bugi duzeltildi, Paylas/Kaydet bos pencere bugi duzeltildi
 - **v6.1** — Her fotograf oncesi poz onerisi, checkbox tik stili, mobil ok butonlariyla siralama, fotografa tikla duzenle, layout yeniden duzenleme
 - **v6** — Bug fixler (mobil baslik hizalama, filtre export Safari uyumu, metin overlay cakismasi), duzenle modu, cerceve render iyilestirmeleri (doku, golge, dekorasyon), UI polish (header shimmer, panel glow, kayit border efekti)
 - **v5** — Mobil oncelikli responsive tasarim, toast bildirimleri, konfeti, countdown progress bar & beep, tam ekran, kamera degistirme, lightbox, klavye kisayollari
